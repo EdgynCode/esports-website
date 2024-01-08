@@ -1,19 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import "./navbar.css";
 
 const Navbar = () => {
-    const [selectedTab, setSelectedTab] = useState("Home");
-
-    return (
-        <nav className="topnav">
-            <a className={`nav-link ${selectedTab === "Home" ? "active" : ""}`} onClick={() => setSelectedTab("Home")}
-            href="/home">Home</a>
-            <a className={`nav-link ${selectedTab === "Schedule" ? "active" : ""}`} onClick={() => setSelectedTab("Schedule")}
-            href="/schedule">Schedule</a>
-            <a className={`nav-link ${selectedTab === "Global Contract Database" ? "active" : ""}`} onClick={() => setSelectedTab("Global Contract Database")}
-            href="/contract">Global Contract Database</a>
-        </nav>
-    );
-}
+  return (
+    <nav className="topnav">
+      <NavLink to="/home" activeClassName="active">Home</NavLink>
+      <NavLink to="/schedule" activeClassName="active">Schedule</NavLink>
+      <NavLink to="/contract" activeClassName="active">Global Contract Database</NavLink>
+    </nav>
+  );
+};
 
 export default Navbar;
