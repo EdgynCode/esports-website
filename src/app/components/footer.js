@@ -1,4 +1,7 @@
 import React from "react";
+import facebookIcon from '../assets/img/facebook.png';
+import instagramIcon from '../assets/img/instagram.png';
+import twitterIcon from '../assets/img/twitter.png';
 import './footer.css'
 
 const Footer = () => {
@@ -7,13 +10,13 @@ const Footer = () => {
             <div className="div-container">
                 <section className="section-container">
                     <a className="media-button" href="#!">
-                        <img className="media-icon" alt="" src="../assets/img/facebook.png"/>
+                        <img className="media-icon" alt="" src={facebookIcon}/>
                     </a>
                     <a className="media-button" href="#!">
-                        <img className="media-icon" alt="" src="../assets/img/instagram.png"/>
+                        <img className="media-icon" alt="" src={instagramIcon}/>
                     </a>
                     <a className="media-button" href="#!">
-                        <img className="media-icon" alt="" src="../assets/img/twitter.png"/>
+                        <img className="media-icon" alt="" src={twitterIcon}/>
                     </a>
                 </section>
             </div>
