@@ -1,12 +1,19 @@
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
+import valBG from '../assets/img/valorant.jpg';
+import './home.css'
 
 const HomePage = () => {
     return (
-        <div>
+        <div className="container">
             <Navbar />
-            <h1>Welcome to the Home Page!</h1>
-            <Footer/>
+            <div className="image-container">
+                <img alt="valbg" src={valBG}/>
+                <div className="gradient-overlay">
+                    <h1>Starts browsing for tournaments using the links below.</h1>
+                </div>
+            </div>
+            <Footer />
         </div>
     );
 }
