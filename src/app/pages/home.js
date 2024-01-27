@@ -1,3 +1,4 @@
+import React from 'react';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import valBG from '../assets/img/valorant.jpg';
