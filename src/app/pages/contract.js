@@ -1,24 +1,25 @@
 import React from 'react';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
+import './contract.css'
 
 const Contract = () => {
     return (
         <div>
             <Navbar />
-            <table style={{borderCollapse: 'collapse', width: '100%'}}>
+            <table className="table-style">
                 <tr>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>League</th>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>Team</th>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>Official Summoner Name</th>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>Position</th>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>Legal Family Name</th>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>Legal First Name</th>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>End Date (Month, Day, Year)</th>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>Residency</th>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>Status</th>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>Tricode</th>
-                    <th style={{border: '1px solid #ddd', padding: '8px'}}>Team Contact</th>
+                    <th className="table-header-style">League</th>
+                    <th className="table-header-style">Team</th>
+                    <th className="table-header-style">Official Summoner Name</th>
+                    <th className="table-header-style">Position</th>
+                    <th className="table-header-style">Legal Family Name</th>
+                    <th className="table-header-style">Legal First Name</th>
+                    <th className="table-header-style">End Date (Month, Day, Year)</th>
+                    <th className="table-header-style">Residency</th>
+                    <th className="table-header-style">Status</th>
+                    <th className="table-header-style">Tricode</th>
+                    <th className="table-header-style">Team Contact</th>
                 </tr>
                 
             </table>

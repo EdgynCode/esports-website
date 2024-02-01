@@ -1,0 +1,9 @@
+.table-style {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.table-header-style {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
