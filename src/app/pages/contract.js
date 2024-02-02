@@ -15,6 +15,7 @@ const Contract = () => {
                     <th className="table-header-style">Position</th>
                     <th className="table-header-style">Legal Family Name</th>
                     <th className="table-header-style">Legal First Name</th>
+                    <th className="table-header-style">Nationality</th>
                     <th className="table-header-style">End Date (Month, Day, Year)</th>
                     <th className="table-header-style">Residency</th>
                     <th className="table-header-style">Status</th>
