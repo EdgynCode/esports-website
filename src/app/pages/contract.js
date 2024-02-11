@@ -2,16 +2,48 @@ import React, { useEffect, useState } from 'react';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import './contract.css'
+import PlayerDTO from '../models/playerDTO';
 
 const Contract = () => {
     const [data, setData] = useState([]);
 
+    const fetchData = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/data', {
+                headers: {
+                    Accept: "application/json"
+                }
+            });
+            const jsonData = await response.json();
+            
+            // Convert API response data to DTO objects
+            const playerDTOs = jsonData.map((player) => {
+                return new PlayerDTO(
+                    player.league,
+                    player.team,
+                    player.summonername,
+                    player.position,
+                    player.name,
+                    player.firstname,
+                    player.nationality,
+                    player.enddate,
+                    player.residency,
+                    player.status,
+                    player.tricode,
+                    player.teamcontact
+                );
+            });
+    
+            setData(playerDTOs);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    
+
     useEffect(() => {
-        fetch('/api/data')
-          .then((response) => response.json())
-          .then((result) => setData(result))
-          .catch((error) => console.error('Error fetching data:', error));
-      }, []);
+        fetchData();
+    }, []);
 
     return (
         <div>
@@ -30,12 +62,12 @@ const Contract = () => {
                     <tr>
                         <th className="table-header-style">League</th>
                         <th className="table-header-style">Team</th>
-                        <th className="table-header-style">Official Summoner Name</th>
+                        <th className="table-header-style">In-game Name</th>
                         <th className="table-header-style">Position</th>
-                        <th className="table-header-style">Legal Family Name</th>
-                        <th className="table-header-style">Legal First Name</th>
+                        <th className="table-header-style">Name</th>
+                        <th className="table-header-style">First Name</th>
                         <th className="table-header-style">Nationality</th>
-                        <th className="table-header-style">End Date (Month, Day, Year)</th>
+                        <th className="table-header-style">Contract End Date</th>
                         <th className="table-header-style">Residency</th>
                         <th className="table-header-style">Status</th>
                         <th className="table-header-style">Tricode</th>
@@ -47,23 +79,23 @@ const Contract = () => {
                         <tr key={index}>
                             <td>{row.league}</td>
                             <td>{row.team}</td>
-                            <td>{row.INGAMENAME}</td>
-                            <td>{row.POSITION}</td>
-                            <td>{row.NAME}</td>
-                            <td>{row.FIRSTNAME}</td>
+                            <td>{row.summonername}</td>
+                            <td>{row.position}</td>
+                            <td>{row.name}</td>
+                            <td>{row.firstname}</td>
                             <td>{row.nationality}</td>
-                            <td>{row.CONTRACTENDDATE}</td>
-                            <td>{row.RESIDENCY}</td>
-                            <td>{row.STATUS}</td>
+                            <td>{row.enddate}</td>
+                            <td>{row.residency}</td>
+                            <td>{row.status}</td>
                             <td>{row.tricode}</td>
-                            <td>{row.TEAMCONTACT}</td>
+                            <td>{row.teamcontact}</td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-
             <Footer/>
         </div>
     );
 }
+
 export default Contract;
