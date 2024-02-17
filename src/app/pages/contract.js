@@ -14,29 +14,35 @@ const Contract = () => {
                 const response = await axios.get('/api/server');
                 const jsonData = await response.data;
                 
-                // Convert API response data to DTO objects
-                const playerDTOs = jsonData.results.map((player) => {
-                    return new PlayerDTO(
-                        player.league,
-                        player.team,
-                        player.summonername,
-                        player.position,
-                        player.name,
-                        player.firstname,
-                        player.nationality,
-                        player.enddate,
-                        player.residency,
-                        player.status,
-                        player.tricode,
-                        player.teamcontact
-                    );
-                });
-        
-                setData(playerDTOs);
+                // Check if jsonData.results is defined
+                if (jsonData && jsonData.results) {
+                    // Convert API response data to DTO objects
+                    const playerDTOs = jsonData.results.map((player) => {
+                        return new PlayerDTO(
+                            player.league,
+                            player.team,
+                            player.summonername,
+                            player.position,
+                            player.name,
+                            player.firstname,
+                            player.nationality,
+                            player.enddate,
+                            player.residency,
+                            player.status,
+                            player.tricode,
+                            player.teamcontact
+                        );
+                    });
+            
+                    setData(playerDTOs);
+                } else {
+                    console.error('Unexpected API response:', jsonData);
+                }
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
-        };        
+        };
+              
 
         fetchData();
     }, []);
