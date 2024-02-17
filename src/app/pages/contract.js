@@ -12,37 +12,32 @@ const Contract = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('/api/server');
-                const jsonData = await response.data;
+                const jsonData = response.data;
+                console.log(jsonData);
                 
-                // Check if jsonData.results is defined
-                if (jsonData && jsonData.results) {
-                    // Convert API response data to DTO objects
-                    const playerDTOs = jsonData.results.map((player) => {
-                        return new PlayerDTO(
-                            player.league,
-                            player.team,
-                            player.summonername,
-                            player.position,
-                            player.name,
-                            player.firstname,
-                            player.nationality,
-                            player.enddate,
-                            player.residency,
-                            player.status,
-                            player.tricode,
-                            player.teamcontact
-                        );
-                    });
-            
-                    setData(playerDTOs);
-                } else {
-                    console.error('Unexpected API response:', jsonData);
-                }
+                // Convert API response data to DTO objects
+                const playerDTOs = jsonData.map((player) => {
+                    return new PlayerDTO(
+                        player.league,
+                        player.team,
+                        player.summonername,
+                        player.position,
+                        player.name,
+                        player.firstname,
+                        player.nationality,
+                        player.enddate,
+                        player.residency,
+                        player.status,
+                        player.tricode,
+                        player.teamcontact
+                    );
+                });
+
+                setData(playerDTOs);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
-              
 
         fetchData();
     }, []);
