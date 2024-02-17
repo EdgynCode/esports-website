@@ -9,7 +9,7 @@ const Contract = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('/api/data', {
+            const response = await fetch('/api/server', {
                 headers: {
                     Accept: "application/json"
                 }
@@ -21,7 +21,7 @@ const Contract = () => {
                 console.error('Server response:', text);
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            
+
             const jsonData = await response.json();
             
             // Convert API response data to DTO objects
