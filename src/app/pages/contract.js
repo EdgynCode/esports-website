@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import './contract.css'
+import PlayerDTO from '../models/playerDTO';
 import axios from 'axios';
 
 const Contract = () => {
@@ -12,7 +13,26 @@ const Contract = () => {
             try {
                 const response = await axios.get('/api/server');
                 const jsonData = response.data;
-                setData(jsonData);
+                
+                // Convert API response data to DTO objects
+                const playerDTOs = jsonData.map((player) => {
+                    return new PlayerDTO(
+                        player.league,
+                        player.team,
+                        player.summonername,
+                        player.position,
+                        player.name,
+                        player.firstname,
+                        player.nationality,
+                        player.enddate,
+                        player.residency,
+                        player.status,
+                        player.tricode,
+                        player.teamcontact
+                    );
+                });
+
+                setData(playerDTOs);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
