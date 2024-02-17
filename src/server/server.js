@@ -1,22 +1,21 @@
+require('dotenv').config();
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
 
 const app = express();
-const port = 5000;
 
 // Configure PostgreSQL connection
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'global-contract-database',
-  password: 'edgyn',
-  port: 5555,
+  connectionString: process.env.POSTGRES_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 // Use CORS middleware
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: process.env.CORS_ORIGIN
 }));
 
 app.get('/api/data', async (req, res) => {
@@ -29,6 +28,7 @@ app.get('/api/data', async (req, res) => {
   }
 });
 
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
