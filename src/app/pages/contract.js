@@ -13,6 +13,7 @@ const Contract = () => {
             try {
                 const response = await axios.get('/api/server');
                 const jsonData = response.data;
+                console.log(jsonData);
                 
                 // Convert API response data to DTO objects
                 const playerDTOs = jsonData.map((player) => {
