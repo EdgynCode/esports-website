@@ -14,6 +14,14 @@ const Contract = () => {
                     Accept: "application/json"
                 }
             });
+
+            if (!response.ok) {
+                // Log the response text for debugging
+                const text = await response.text();
+                console.error('Server response:', text);
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
             const jsonData = await response.json();
             
             // Convert API response data to DTO objects
