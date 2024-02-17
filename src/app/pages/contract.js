@@ -9,7 +9,7 @@ const Contract = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:5000/api/data', {
+            const response = await fetch('/api/data', {
                 headers: {
                     Accept: "application/json"
                 }
