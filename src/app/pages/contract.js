@@ -3,53 +3,41 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import './contract.css'
 import PlayerDTO from '../models/playerDTO';
+import axios from 'axios';
 
 const Contract = () => {
     const [data, setData] = useState([]);
 
-    const fetchData = async () => {
-        try {
-            const response = await fetch('/api/server', {
-                headers: {
-                    Accept: "application/json"
-                }
-            });
-
-            if (!response.ok) {
-                // Log the response text for debugging
-                const text = await response.text();
-                console.error('Server response:', text);
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const jsonData = await response.json();
-            
-            // Convert API response data to DTO objects
-            const playerDTOs = jsonData.map((player) => {
-                return new PlayerDTO(
-                    player.league,
-                    player.team,
-                    player.summonername,
-                    player.position,
-                    player.name,
-                    player.firstname,
-                    player.nationality,
-                    player.enddate,
-                    player.residency,
-                    player.status,
-                    player.tricode,
-                    player.teamcontact
-                );
-            });
-    
-            setData(playerDTOs);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-    
-
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/api/server');
+                const jsonData = response.data;
+                
+                // Convert API response data to DTO objects
+                const playerDTOs = jsonData.map((player) => {
+                    return new PlayerDTO(
+                        player.league,
+                        player.team,
+                        player.summonername,
+                        player.position,
+                        player.name,
+                        player.firstname,
+                        player.nationality,
+                        player.enddate,
+                        player.residency,
+                        player.status,
+                        player.tricode,
+                        player.teamcontact
+                    );
+                });
+
+                setData(playerDTOs);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
         fetchData();
     }, []);
 
