@@ -12,11 +12,10 @@ const Contract = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get('/api/server');
-                const jsonData = response.data;
-                console.log(jsonData);
+                const jsonData = await response.data;
                 
                 // Convert API response data to DTO objects
-                const playerDTOs = jsonData.map((player) => {
+                const playerDTOs = jsonData.results.map((player) => {
                     return new PlayerDTO(
                         player.league,
                         player.team,
@@ -32,12 +31,12 @@ const Contract = () => {
                         player.teamcontact
                     );
                 });
-
+        
                 setData(playerDTOs);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
-        };
+        };        
 
         fetchData();
     }, []);
