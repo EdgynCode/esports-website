@@ -9,37 +9,9 @@ const Contract = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('/api/server');
-                const jsonData = response.data;
-                console.log(jsonData);
-                
-                // Convert API response data to DTO objects
-                const playerDTOs = jsonData.map((player) => {
-                    return new PlayerDTO(
-                        player.league,
-                        player.team,
-                        player.summonername,
-                        player.position,
-                        player.name,
-                        player.firstname,
-                        player.nationality,
-                        player.enddate,
-                        player.residency,
-                        player.status,
-                        player.tricode,
-                        player.teamcontact
-                    );
-                });
-
-                setData(playerDTOs);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
+        fetch('/src/api/server')
+        .then(response => response.json())
+        .then(data => setData(data.results));
     }, []);
 
     return (
