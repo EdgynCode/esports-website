@@ -9,9 +9,13 @@ const Contract = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('/src/api/server')
-        .then(response => response.json())
-        .then(data => setData(data.results));
+        const fetchData = async () => {
+            const response = await fetch('/api/server');
+            const data = await response.json();
+            setData(data);
+        };
+
+        fetchData();
     }, []);
 
     return (
