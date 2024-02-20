@@ -2,16 +2,18 @@ import React, { useEffect, useState } from 'react';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import './contract.css'
-import PlayerDTO from '../models/playerDTO';
 import axios from 'axios';
 
 const Contract = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        fetch('/src/api/server')
-        .then(response => response.json())
-        .then(data => setData(data.results));
+        const fetchData = async () => {
+            const result = await axios('/api/server');
+            setData(result.data);
+        };
+
+        fetchData();
     }, []);
 
     return (
