@@ -2,20 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import './contract.css'
-import axios from 'axios';
 
 const Contract = () => {
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios('/api/server');
-            setData(result.data);
-        };
-
-        fetchData();
-    }, []);
-
     return (
         <div>
             <Navbar />
@@ -46,22 +34,7 @@ const Contract = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((row, index) => (
-                        <tr key={index}>
-                            <td>{row.league}</td>
-                            <td>{row.team}</td>
-                            <td>{row.summonername}</td>
-                            <td>{row.position}</td>
-                            <td>{row.name}</td>
-                            <td>{row.firstname}</td>
-                            <td>{row.nationality}</td>
-                            <td>{row.enddate}</td>
-                            <td>{row.residency}</td>
-                            <td>{row.status}</td>
-                            <td>{row.tricode}</td>
-                            <td>{row.teamcontact}</td>
-                        </tr>
-                    ))}
+                    
                 </tbody>
             </table>
             <Footer/>
