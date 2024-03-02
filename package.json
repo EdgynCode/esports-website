@@ -24,7 +24,6 @@
   "scripts": {
     "start": "(set NODE_OPTIONS=--openssl-legacy-provider) && react-scripts start",
     "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider ",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
