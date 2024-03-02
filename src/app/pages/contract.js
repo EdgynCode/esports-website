@@ -2,8 +2,49 @@ import React, { useEffect, useState } from 'react';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import './contract.css'
+import PlayerDTO from '../models/playerDTO';
 
 const Contract = () => {
+    const [data, setData] = useState([]);
+
+    const fetchData = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/api/data', {
+                headers: {
+                    Accept: "application/json"
+                }
+            });
+            const jsonData = await response.json();
+            
+            // Convert API response data to DTO objects
+            const playerDTOs = jsonData.map((player) => {
+                return new PlayerDTO(
+                    player.league,
+                    player.team,
+                    player.summonername,
+                    player.position,
+                    player.name,
+                    player.firstname,
+                    player.nationality,
+                    player.enddate,
+                    player.residency,
+                    player.status,
+                    player.tricode,
+                    player.teamcontact
+                );
+            });
+    
+            setData(playerDTOs);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
         <div>
             <Navbar />
@@ -34,7 +75,27 @@ const Contract = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    {data.map((row, index) => (
+                        <tr key={index}>
+                            <td>{row.league.slice(-3)}</td>
+                            <td>{row.team}</td>
+                            <td>{row.summonername}</td>
+                            <td>{row.position}</td>
+                            <td>{row.name}</td>
+                            <td>{row.firstname}</td>
+                            <td>{row.nationality}</td>
+                            <td>{new Date(row.enddate).toLocaleDateString('en-US', {
+                                month: 'long',
+                                day: 'numeric',
+                                year: 'numeric'
+                            })}
+                            </td>
+                            <td>{row.residency === 1 ? 'Resident' : 'Non-resident'}</td>
+                            <td>{row.status === 1 ? 'Active' : 'Inactive'}</td>
+                            <td>{row.tricode}</td>
+                            <td>{row.teamcontact}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
             <Footer/>
