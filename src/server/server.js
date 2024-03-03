@@ -1,18 +1,21 @@
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
-require('dotenv').config();
+const dotenv = require('dotenv');
 
 const app = express();
 const port = 5000;
 
+// Load env from .env.development.local file
+dotenv.config({ path: '.env.development.local' });
+
 // Configure PostgreSQL connection
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'global-contract-database',
-  password: 'edgyn',
-  port: 5555,
+  user: process.env.POSTGRES_USER,
+  host: process.env.POSTGRES_HOST,
+  database: process.env.POSTGRES_DATABASE,
+  password: process.env.POSTGRES_PASSWORD,
+  connectionString: process.env.POSTGRES_PRISMA_URL
 });
 
 // Use CORS middleware
