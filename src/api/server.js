@@ -20,10 +20,10 @@ const pool = new Pool({
 
 // Use CORS middleware
 app.use(cors({
-  origin: "http://localhost:3000"
+  origin: "http://localhost:5555"
 }));
 
-app.get('/api/data', async (req, res) => {
+app.get('/api/server', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM "CONTRACT"');
     res.json(result.rows);
