@@ -9,7 +9,7 @@ const Contract = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('https://ep-sweet-fire-a4ltm0p5.us-east-1.aws.neon.tech/api/server', {
+            const response = await fetch('https://ep-sweet-fire-a4ltm0p5.us-east-1.aws.neon.tech', {
                 headers: {
                     Accept: "application/json"
                 }
