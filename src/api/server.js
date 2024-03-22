@@ -20,7 +20,7 @@ const pool = new Pool({
 
 // Use CORS middleware
 app.use(cors({
-  origin: "https://esports-website-eta.vercel.app/"
+  origin: "https://esports-website-eta.vercel.app"
 }));
 
 app.get('/api/server', async (req, res) => {
