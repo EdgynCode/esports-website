@@ -1,13 +1,10 @@
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
-const dotenv = require('dotenv');
+require('dotenv').config();
 
 const app = express();
-const port = 5000;
-
-// Load env from .env.development.local file
-dotenv.config({ path: '.env.development.local' });
+const port = process.env.PORT || 5000;
 
 // Configure PostgreSQL connection
 const pool = new Pool({
@@ -20,15 +17,17 @@ const pool = new Pool({
 
 // Use CORS middleware
 app.use(cors({
-  origin: "https://esports-website-eta.vercel.app"
+  origin: "https://esports-database.vercel.app/"
 }));
 
-app.get('/api/server', async (req, res) => {
+app.get('/api/data', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM "CONTRACT"');
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM "CONTRACT"');
+    client.release();
     res.json(result.rows);
   } catch (error) {
-    console.error('Error executing query', error);
+    console.error('Error executing query:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });

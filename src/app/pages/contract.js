@@ -9,7 +9,7 @@ const Contract = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('https://ep-sweet-fire-a4ltm0p5.us-east-1.aws.neon.tech', {
+            const response = await fetch('https://esports-database.vercel.app/api/data', {
                 headers: {
                     Accept: "application/json"
                 }
