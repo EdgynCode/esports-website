@@ -10,7 +10,6 @@ const Contract = () => {
     const fetchData = async () => {
         try {
             const response = await fetch('https://esports-database.vercel.app/api/data', {
-                method: 'POST',
                 headers: {
                     Accept: "application/json",
                     'Content-Type': 'application/json'
