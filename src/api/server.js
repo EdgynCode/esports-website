@@ -25,6 +25,7 @@ app.get('/api/data', async (req, res) => {
     const client = await pool.connect();
     const result = await client.query('SELECT * FROM "CONTRACT"');
     client.release();
+    res.setHeader('Content-Type', 'application/json');
     res.json(result.rows);
   } catch (error) {
     console.error('Error executing query:', error);
