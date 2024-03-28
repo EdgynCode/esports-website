@@ -14,6 +14,9 @@ const Contract = () => {
                     Accept: "application/json"
                 }
             });
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
             const jsonData = await response.json();
             
             // Convert API response data to DTO objects
