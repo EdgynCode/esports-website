@@ -23,7 +23,6 @@ app.use(cors({
 app.get('/api/data', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM "CONTRACT"');
-    res.setHeader('Content-Type', 'application/json');
     res.json(result.rows);
   } catch (error) {
     console.error('Error executing query:', error);
