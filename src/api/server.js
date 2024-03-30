@@ -18,7 +18,7 @@ const pool = new Pool({
 
 app.get('/api/data', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM "CONTRACT"');
+    const result = await pool.query(`SELECT * FROM "CONTRACT"`);
     res.json(result.rows);
   } catch (error) {
     console.error('Error executing query:', error);
