@@ -22,7 +22,7 @@ app.get('/api/data', async (req, res) => {
     res.json(result.rows);
   } catch (error) {
     console.error('Error executing query:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: error.message });
   }
 });
 
