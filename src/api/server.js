@@ -1,3 +1,4 @@
+/*
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
@@ -22,10 +23,27 @@ app.get('/api/data', async (req, res) => {
     res.json(result.rows);
   } catch (error) {
     console.error('Error executing query:', error);
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+*/
+const { db } = require('@vercel/postgres');
+
+const client = await db.connect();
+await client.sql`SELECT * FROM "CONTRACT"`;
+
+const getLeagueData = async (req, res) => {
+  try {
+    const client = await db.connect();
+    const result = await db.sql`SELECT * FROM "CONTRACT"`;
+    res.status(200).json({ success: true, message: 'Data query successfully' });
+  }
+  catch (error) {
+    console.error('Error executing query:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}

@@ -2,53 +2,21 @@ import React, { useEffect, useState } from 'react';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import './contract.css'
-import PlayerDTO from '../models/playerDTO';
+// import PlayerDTO from '../models/playerDTO';
 
 const Contract = () => {
-    const [data, setData] = useState([]);
-
-    const fetchData = async () => {
-        try {
-            const response = await fetch('/api/data', {
-                headers: {
-                    Accept: "application/json",
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-            const jsonData = await response.json();
-            
-            // Convert API response data to DTO objects
-            const playerDTOs = jsonData.map((player) => {
-                return new PlayerDTO(
-                    player.league,
-                    player.team,
-                    player.summonername,
-                    player.position,
-                    player.name,
-                    player.firstname,
-                    player.nationality,
-                    player.enddate,
-                    player.residency,
-                    player.status,
-                    player.tricode,
-                    player.teamcontact
-                );
-            });
-    
-            setData(playerDTOs);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-    
+    const [contractData, setContractData] = useState([]);
 
     useEffect(() => {
-        fetchData();
+        fetch('/api/data')
+            .then((response) => response.json())
+            .then((data) => {
+                setContractData(data);
+            })
+            .catch((error) => {
+                console.error('Error fetching contract data:', error);
+            });
     }, []);
-
     return (
         <div>
             <Navbar />
@@ -79,25 +47,25 @@ const Contract = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.map((row, index) => (
-                        <tr key={index}>
-                            <td>{row.league.slice(-3)}</td>
-                            <td>{row.team}</td>
-                            <td>{row.summonername}</td>
-                            <td>{row.position}</td>
-                            <td>{row.name}</td>
-                            <td>{row.firstname}</td>
-                            <td>{row.nationality}</td>
-                            <td>{new Date(row.enddate).toLocaleDateString('en-US', {
+                    {contractData.map((contract) => (
+                        <tr key={contract.id}>
+                            <td>{contract.league.slice(-3)}</td>
+                            <td>{contract.team}</td>
+                            <td>{contract.summonername}</td>
+                            <td>{contract.position}</td>
+                            <td>{contract.name}</td>
+                            <td>{contract.firstname}</td>
+                            <td>{contract.nationality}</td>
+                            <td>{new Date(contract.enddate).toLocaleDateString('en-US', {
                                 month: 'long',
                                 day: 'numeric',
                                 year: 'numeric'
                             })}
                             </td>
-                            <td>{row.residency === 1 ? 'Resident' : 'Non-resident'}</td>
-                            <td>{row.status === 1 ? 'Active' : 'Inactive'}</td>
-                            <td>{row.tricode}</td>
-                            <td>{row.teamcontact}</td>
+                            <td>{contract.residency === 1 ? 'Resident' : 'Non-resident'}</td>
+                            <td>{contract.status === 1 ? 'Active' : 'Inactive'}</td>
+                            <td>{contract.tricode}</td>
+                            <td>{contract.teamcontact}</td>
                         </tr>
                     ))}
                 </tbody>
