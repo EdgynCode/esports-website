@@ -33,13 +33,10 @@ app.listen(port, () => {
 */
 const { db } = require('@vercel/postgres');
 
-const client = await db.connect();
-await client.sql`SELECT * FROM "CONTRACT"`;
-
 export const getLeagueData = async (req, res) => {
   try {
     const client = await db.connect();
-    const result = await db.sql`SELECT * FROM "CONTRACT"`;
+    const result = await db.sql`SELECT json_agg(t) FROM "CONTRACT" t;`;
     client.release();
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json({ success: true, message: 'Data query successfully' });
