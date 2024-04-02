@@ -1,22 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import './contract.css'
+import { fetchLeagueData } from '../../api/server';
 // import PlayerDTO from '../models/playerDTO';
 
-const Contract = () => {
-    const [contractData, setContractData] = useState([]);
+const Contract = async () => {
+    const leagueData = await fetchLeagueData();
 
-    useEffect(() => {
-        fetch('/api/data')
-            .then((response) => response.json())
-            .then((data) => {
-                setContractData(data);
-            })
-            .catch((error) => {
-                console.error('Error fetching contract data:', error);
-            });
-    }, []);
     return (
         <div>
             <Navbar />
@@ -47,25 +38,25 @@ const Contract = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {contractData.map((contract) => (
-                        <tr key={contract.id}>
-                            <td>{contract.league.slice(-3)}</td>
-                            <td>{contract.team}</td>
-                            <td>{contract.summonername}</td>
-                            <td>{contract.position}</td>
-                            <td>{contract.name}</td>
-                            <td>{contract.firstname}</td>
-                            <td>{contract.nationality}</td>
-                            <td>{new Date(contract.enddate).toLocaleDateString('en-US', {
+                    {leagueData.map((leagueData) => (
+                        <tr key={leagueData.id}>
+                            <td>{leagueData.league.slice(-3)}</td>
+                            <td>{leagueData.team}</td>
+                            <td>{leagueData.summonername}</td>
+                            <td>{leagueData.position}</td>
+                            <td>{leagueData.name}</td>
+                            <td>{leagueData.firstname}</td>
+                            <td>{leagueData.nationality}</td>
+                            <td>{new Date(leagueData.enddate).toLocaleDateString('en-US', {
                                 month: 'long',
                                 day: 'numeric',
                                 year: 'numeric'
                             })}
                             </td>
-                            <td>{contract.residency === 1 ? 'Resident' : 'Non-resident'}</td>
-                            <td>{contract.status === 1 ? 'Active' : 'Inactive'}</td>
-                            <td>{contract.tricode}</td>
-                            <td>{contract.teamcontact}</td>
+                            <td>{leagueData.residency === 1 ? 'Resident' : 'Non-resident'}</td>
+                            <td>{leagueData.status === 1 ? 'Active' : 'Inactive'}</td>
+                            <td>{leagueData.tricode}</td>
+                            <td>{leagueData.teamcontact}</td>
                         </tr>
                     ))}
                 </tbody>
