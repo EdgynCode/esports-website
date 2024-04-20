@@ -1,6 +1,6 @@
 const express = require('express');
 const { Pool } = require('pg');
-const cors = require('cors');
+// const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
@@ -19,6 +19,7 @@ const pool = new Pool({
 app.get('/api/data', async (req, res) => {
   try {
     const result = await pool.query(`SELECT * FROM "CONTRACT"`);
+    res.setHeader('Content-Type', 'application/json');
     res.json(result.rows);
   } catch (error) {
     console.error('Error executing query:', error);
