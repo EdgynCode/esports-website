@@ -8,8 +8,13 @@ const Contract = () => {
     const [contractData, setContractData] = useState([]);
 
     useEffect(() => {
-        fetch('https://esports-database.vercel.app/api/data')
-            .then((response) => response.json())
+        fetch('/api/data')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then((data) => {
                 setContractData(data);
             })
