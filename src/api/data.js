@@ -1,10 +1,13 @@
 const { Pool } = require('pg');
 // const cors = require('cors');
-require('dotenv').config();
+// require('dotenv').config();
 
 // Configure PostgreSQL connection
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 })
 
 // Use CORS middleware
