@@ -2,26 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import './contract.css'
+import { fetchLeagueData } from '../../api/data';
 // import PlayerDTO from '../models/playerDTO';
 
 const Contract = () => {
-    const [contractData, setContractData] = useState([]);
+    const [leagueData, setLeagueData] = useState([]);
 
     useEffect(() => {
-        fetch('/api/data')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setContractData(data);
-            })
-            .catch((error) => {
-                console.error('Error fetching contract data:', error);
-            });
-    }, []);
+        getLeagueData();
+    });
+
+    const getLeagueData = async () => {
+        const data = await fetchLeagueData();
+        setLeagueData(data);
+    }
     return (
         <div>
             <Navbar />
@@ -52,7 +46,7 @@ const Contract = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {contractData.map((contract) => (
+                    {leagueData.map((contract) => (
                         <tr key={contract.id}>
                             <td>{contract.league.slice(-3)}</td>
                             <td>{contract.team}</td>
