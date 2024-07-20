@@ -1,7 +1,11 @@
 import { createClient } from '@vercel/postgres';
 
 export async function fetchLeagueData() {
-  const client = createClient();
+  const connectionString = process.env.POSTGRES_URL_NON_POOLING;
+  if (!connectionString) {
+    throw new Error("Connection string is not defined.");
+  }
+  const client = createClient({ connectionString });
   await client.connect();
   
   try {
