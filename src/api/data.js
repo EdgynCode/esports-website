@@ -5,7 +5,7 @@ export async function fetchLeagueData() {
   await client.connect();
   
   try {
-    const data = await sql`SELECT * FROM "CONTRACT"`;
+    const data = await client.sql`SELECT * FROM "CONTRACT"`;
     console.log('Data fetch completed.');
     return data.rows;
   }
