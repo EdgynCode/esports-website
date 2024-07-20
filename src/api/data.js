@@ -1,23 +1,17 @@
-import { createClient } from '@vercel/postgres';
+import { createPool } from '@vercel/postgres';
+
+const pool = createPool({
+  connectionString: "postgres://default:9M7XGZAsjJYf@ep-sweet-fire-a4ltm0p5-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
+});
 
 export async function fetchLeagueData() {
-  const connectionString = process.env.POSTGRES_URL_NON_POOLING;
-  if (!connectionString) {
-    throw new Error("Connection string is not defined.");
-  }
-  const client = createClient({ connectionString });
-  await client.connect();
-  
   try {
-    const data = await client.sql`SELECT * FROM "CONTRACT"`;
+    const data = await pool.sql`SELECT * FROM "CONTRACT"`;
     console.log('Data fetch completed.');
     return data.rows;
   }
   catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to fetch league data.');
-  }
-  finally {
-    await client.end();
   }
 }
