@@ -1,12 +1,8 @@
-import { createPool } from '@vercel/postgres';
-
-const pool = createPool({
-  connectionString: process.env.POSTGRES_URL,
-});
+import { sql } from '@vercel/postgres';
 
 export async function fetchLeagueData() {
   try {
-    const data = await pool.sqlSELECT * FROM "CONTRACT";
+    const data = await sql`SELECT * FROM "CONTRACT"`;
     console.log('Data fetch completed.');
     return data.rows;
   }
