@@ -6,7 +6,7 @@ const pool = createPool({
 
 export async function fetchLeagueData() {
   try {
-    const data = await pool.sql`SELECT * FROM "CONTRACT"`;
+    const data = await pool.sql`SELECT * FROM LeagueContract`;
     console.log('Data fetch completed.');
     return data.rows;
   }
