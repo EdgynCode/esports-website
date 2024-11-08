@@ -1,15 +1,12 @@
-import React from 'react';
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
+import React from "react";
+import Layout from "../components/Layout";
 
 const Schedule = () => {
-    return (
-        <div>
-            <Navbar />
-            <h1>Welcome to the Schedule Page!</h1>
-            <Footer/>
-        </div>
-    );
-}
+  return (
+    <Layout>
+      <h1>Welcome to the Schedule Page!</h1>
+    </Layout>
+  );
+};
 
 export default Schedule;
