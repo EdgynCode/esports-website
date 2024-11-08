@@ -1,8 +1,8 @@
 import { createPool } from "@vercel/postgres";
 
 const pool = createPool({
-  // connectionString: "postgres://default:9M7XGZAsjJYf@ep-sweet-fire-a4ltm0p5-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
-  connectionString: process.env.POSTGRES_URL,
+  connectionString:
+    "postgres://default:9M7XGZAsjJYf@ep-sweet-fire-a4ltm0p5-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require",
 });
 
 export async function fetchLeagueData() {
