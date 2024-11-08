@@ -3,7 +3,6 @@ import Footer from "../components/footer";
 import Navbar from "../components/navbar";
 import './contract.css'
 import { fetchLeagueData } from '../../api/data';
-// import PlayerDTO from '../models/playerDTO';
 
 const Contract = () => {
     const [leagueData, setLeagueData] = useState([]);
