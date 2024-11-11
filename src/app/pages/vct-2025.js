@@ -11,6 +11,12 @@ const VCT2025 = () => {
 
   return (
     <Layout>
+      <div className="tab-container">
+        <div className="leagues">VCT Americas</div>
+        <div className="leagues">VCT EMEA</div>
+        <div className="leagues">VCT CN</div>
+        <div className="leagues">VCT Pacific</div>
+      </div>
       <div className="container">
         {cards.map((card) => (
           <div key={card.id} className="card">

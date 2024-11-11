@@ -11,6 +11,13 @@ const LoL2025 = () => {
 
   return (
     <Layout>
+      <div className="tab-container">
+        <div className="leagues">LTA</div>
+        <div className="leagues">LEC</div>
+        <div className="leagues">LPL</div>
+        <div className="leagues">LCK</div>
+        <div className="leagues">LCP</div>
+      </div>
       <div className="container">
         {cards.map((card) => (
           <div key={card.id} className="card">

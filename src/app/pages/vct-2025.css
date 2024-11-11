@@ -29,3 +29,15 @@
     font-size: 1.1em;
     font-weight: 500;
 }
+
+.leagues {
+    width: 50%;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.tab-container {
+    display: flex;
+}
