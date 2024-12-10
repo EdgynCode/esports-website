@@ -1,5 +1,6 @@
 import React from "react";
 import Layout from "../components/Layout";
+import TabNavigator from "../components/tab-navigator";
 import "./vct-2025.css";
 
 const VCT2025 = () => {
