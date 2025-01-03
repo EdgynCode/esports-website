@@ -1,14 +1,14 @@
 import React from "react";
-import "./TabNavigator.css";
+import "./tab-navigator.css";
 
-const TabNavigator = ({ activeTab, setActiveTab }) => {
+const TabNavigator = ({ activeTab, setActiveTab, leagueArray }) => {
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
 
   return (
     <div className="tab-container">
-      {["VCT Americas", "VCT EMEA", "VCT CN", "VCT Pacific"].map((league) => (
+      {leagueArray.map((league) => (
         <div
           key={league}
           className={`leagues ${activeTab === league ? "active" : ""}`}

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./contract.css";
-import { fetchLeagueData } from "../../api/data";
+import { fetchLeagueContractData } from "../../api/data";
 import Layout from "../components/Layout";
 
 const Contract = () => {
@@ -11,7 +11,7 @@ const Contract = () => {
   });
 
   const getLeagueData = async () => {
-    const data = await fetchLeagueData();
+    const data = await fetchLeagueContractData();
     setLeagueData(data);
   };
   return (

@@ -1,0 +1,16 @@
+.leagues {
+  width: 25%;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.leagues.active {
+  background-color: #ddd;
+}
+
+.tab-container {
+  display: flex;
+}
